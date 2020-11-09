@@ -1,0 +1,25 @@
+html,body {
+    position:relative;
+    margin:0;
+    padding:0;
+    overflow:auto;
+}
+.footer-style
+{
+    width:100%;
+    bottom: 0;
+    position:absolute;
+    
+}
+.footer-row
+{
+    background-color: darkslategray;
+    width:100%;
+    bottom: 0px;
+    margin-top:50px;
+    position:absolute;
+}
+.color
+{
+    background-color: aqua;
+}
