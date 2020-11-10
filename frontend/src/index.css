@@ -1,25 +1,22 @@
-html,body {
+/*html,body {
     position:relative;
     margin:0;
     padding:0;
     overflow:auto;
-}
+}*/
 .footer-style
 {
-    width:100%;
-    bottom: 0;
-    position:absolute;
-    margin-top: 10px;
+    min-height: 10vh;
     
 }
-.footer-row
+/*.footer-row
 {
     background-color:#2C3E50 ;
     width:100%;
     bottom: 0px;
     margin-top:50px;
     position:absolute;
-}
+}*/
 .color
 {
     background-color:#2C3E50 ;

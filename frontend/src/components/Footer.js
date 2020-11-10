@@ -1,12 +1,12 @@
 import React from 'react'
-import { Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 
 const Footer = () => {
     return (
         <div >
             
-         <Row className="footer-row">
-             {/*<Col>
+         {/*<Row className="footer-row">
+             <Col>
                 <h4>Get To Know Us More</h4>
                 <ul>
                     <li>About Us</li>
@@ -20,7 +20,7 @@ const Footer = () => {
              <Row className="footer-style"> 
              <Col className="text-center py-3 color">Copyright &copy;2020 ProShop | Terms & Services | All Right's Reserved </Col>
          </Row>
-         </Row>
+        
          
          </div>
         
