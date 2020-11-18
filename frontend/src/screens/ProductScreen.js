@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Image, Card, ListGroup, Button, ListGroupItem } from 'react-bootstrap'
+import { Row, Col, Image, Card, ListGroup, Button, ListGroupItem, FormControl, option } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import { listProductDetails } from '../actions/productActions'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 
-const ProductScreen = ({ match }) => {
+const ProductScreen = ({ history, match }) => {
+    const [qty, setQty] = useState(0)
     const dispatch = useDispatch()
     const productDetails = useSelector(state => state.productDetails)
     const {loading, error, product} = productDetails 
@@ -15,14 +16,17 @@ const ProductScreen = ({ match }) => {
     useEffect(()=>{
        dispatch(listProductDetails(match.params.id))
     }, [dispatch, match])
-
+    const addToCartHandler = () =>{
+        history.push(`/cart/${match.params.id}?${qty}`)
+    }
   
     return (
         <>
         <Link className='btn btn-light my-3' to='/'>
             <i className="fa fa-reply"></i>&nbsp;&nbsp;GO BACK
         </Link>
-    {loading ? <Loader /> : error ? <Message variant = 'danger'>{error}</Message>: <Row>
+            {loading ? <Loader /> : error ? <Message variant = 'danger'>{error}</Message>
+            : <Row>
             <Col md={6}>
                 <Image src={product.image} alt={product.name} fluid />
             </Col>
@@ -38,7 +42,7 @@ const ProductScreen = ({ match }) => {
                         <p>{product.description}</p>
                     </ListGroupItem>
                     <ListGroupItem>
-                        <strong>${product.price}</strong>
+                        <strong>Price: ${product.price}</strong>
                     </ListGroupItem>
                 </ListGroup>
             </Col>
@@ -57,8 +61,26 @@ const ProductScreen = ({ match }) => {
                             <Col>{product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}</Col>
                             </Row>
                         </ListGroupItem>
+                        { product.countInStock > 0 && (
+                            <ListGroupItem>
+                                <Row>
+                                    <Col>Qantity Available</Col>
+                                    <Col>
+                                    <FormControl as='select' value={qty} onChange={(e) => setQty(e.target.value)}>
+                                    {[...Array(product.countInStock).keys()].map((x) => (
+                                        <option key={x + 1} value={ x + 1}>{x + 1}</option>
+                                    ))}
+                                    </FormControl>
+                                    </Col>
+                                </Row>
+                            </ListGroupItem>
+                        )}
                         <ListGroupItem>
-                            <Button variant='secondary' className='btn-block' disabled={product.countInStock === 0}>Add To Cart</Button>
+                            <Button 
+                            onClick={addToCartHandler}
+                            variant='secondary' 
+                            className='btn-block' 
+                            disabled={product.countInStock === 0}>Add To Cart</Button>
                         </ListGroupItem>
                         </ListGroup>
                 </Card>
