@@ -1,5 +1,5 @@
 {
-  "name": "proshop-ecommerce",
+  "name": "electrostore-ecommerce",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -15,15 +15,15 @@
   "author": "Devansh Singh",
   "license": "MIT",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "colors": "^1.4.0",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-async-handler": "^1.1.4",
-    "mongoose": "^5.10.13"
+    "bcryptjs": "2.4.3",
+    "colors": "1.4.0",
+    "dotenv": "8.2.0",
+    "express": "4.17.1",
+    "express-async-handler": "1.1.4",
+    "mongoose": "5.10.13"
   },
   "devDependencies": {
-    "concurrently": "^5.3.0",
-    "nodemon": "^2.0.6"
+    "concurrently": "5.3.0",
+    "nodemon": "2.0.6"
   }
 }
