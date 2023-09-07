@@ -11,7 +11,7 @@ dotenv.config()
 app.get('/',(req, res)=>{
     res.send('Api is running....');
 })
-app.use('/api/products', productRoutes)
+app.use('/', productRoutes)
 app.use(notFound)
 app.use(errorHandler)
 const PORT = process.env.PORT || 5000;
