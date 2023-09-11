@@ -5,7 +5,7 @@ import asyncHandler from 'express-async-handler'
 //@desc Fetch all products
 //@route GET api/products
 //@access Public
-router.get('/', asyncHandler(async (req, res)=>{
+router.get('/api/products', asyncHandler(async (req, res)=>{
     const products = await Product.find({})
     
     res.json(products)
@@ -13,7 +13,7 @@ router.get('/', asyncHandler(async (req, res)=>{
 //@desc Fetch all products
 //@route GET api/products/:id
 //@access Public
-router.get('/:id', asyncHandler(async (req, res)=>{
+router.get('/api/product/:id', asyncHandler(async (req, res)=>{
     const product = await Product.findById(req.params.id)
     if (product)
     {

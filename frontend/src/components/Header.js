@@ -1,8 +1,11 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap'
-import { Nav, Navbar, Container, Form, Button, FormControl} from 'react-bootstrap';
+import { Nav, Navbar, Container, Form, Button, FormControl, Badge} from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+    const { cartItems } = useSelector((state) => state.cart);
+    const noOfItems = cartItems.reduce((a, item) => a + Number(item.qty), 0);
     return (
         
         <header>
@@ -18,7 +21,7 @@ const Header = () => {
                 <Nav.Link >< i className='fas fa-shopping-cart'></i>&nbsp;&nbsp;SignIn/SignUp</Nav.Link>
                 </LinkContainer>
                 <LinkContainer to='/cart'>
-                <Nav.Link href="/cart">< i className='fas fa-user'></i>&nbsp;&nbsp;Add To Cart</Nav.Link>
+                <Nav.Link href="/cart">< i className='fas fa-user'></i>&nbsp;&nbsp;Cart {noOfItems > 0 && ( <Badge pill bg="danger">{noOfItems}</Badge> )}</Nav.Link>
                 </LinkContainer>
                 </Nav>
                 <Form inline>
