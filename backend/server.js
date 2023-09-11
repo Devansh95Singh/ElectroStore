@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import connectDb from './config/db.js'
 import colors from 'colors'
+import cookieParser from 'cookie-parser';
 import { notFound, errorHandler} from './middleware/errorMiddleware.js'
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
@@ -10,6 +11,7 @@ connectDb()
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 dotenv.config()
 app.get('/',(req, res)=>{
     res.send('Api is running....');
