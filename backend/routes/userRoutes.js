@@ -3,6 +3,7 @@ import {
   getUserProfile,
   logout,
   register,
+  updateUserProfile,
 } from "../controllers/userController.js";
 import express from "express";
 import {
@@ -15,5 +16,8 @@ router.post("/login", loginUser);
 router.route("/profile").get(tokenVerifier, allowedForAdmin, getUserProfile);
 router.route("/logout").get(tokenVerifier, logout);
 router.route("/register").post(register);
+router
+  .route("/updateProfile")
+  .put(tokenVerifier, allowedForAdmin, updateUserProfile);
 
 export default router;
