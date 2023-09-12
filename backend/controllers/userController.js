@@ -42,8 +42,41 @@ const register = asyncHandler(async (req, res) => {
   }
 });
 
-const getUserProfile = asyncHandler((req, res) => {
-  res.send("profile route");
+const getUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  if (user) {
+    res.status(200).json({
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      _id: user._id,
+    });
+  } else {
+    res.status(400);
+    throw new Error("User not found");
+  }
+});
+
+const updateUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  let newUser;
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+    newUser = await user.save();
+    res.status(200).json({
+      name: newUser.name,
+      email: newUser.email,
+      isAdmin: newUser.isAdmin,
+      _id: newUser._id,
+    });
+  } else {
+    res.status(400);
+    throw new Error("User not found");
+  }
 });
 
 const logout = asyncHandler((req, res) => {
@@ -64,4 +97,4 @@ const generateToken = (res, userId) => {
   });
 };
 
-export { loginUser, getUserProfile, logout, register };
+export { loginUser, getUserProfile, updateUserProfile, logout, register };
